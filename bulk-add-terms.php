@@ -4,6 +4,7 @@
  * Description: This plugin will help you to add multiple taxonomy terms in one go. Ajax is used to add terms.
  * Version:     1.0
  * Author:      Sohan Zaman
+ * Author URI:  https://github.com/sohan5005
  * License:     GPL2
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Domain Path: /lang
