@@ -15,10 +15,10 @@ defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 add_action( 'admin_menu', 'ts_register_add_bulk_term_page' );
 add_action( 'admin_enqueue_scripts', 'ts_bat_admin_scripts' );
 add_action( 'wp_ajax_ts_bat_add_new_terms', 'ts_bat_add_new_terms_callback' );
-add_action('plugins_loaded', 'wan_load_textdomain');
+add_action( 'plugins_loaded', 'ts_bat_load_text_domain' );
 
-if( !function_exists( 'ts_register_add_bulk_term_page' ) ):
-    function ts_register_add_bulk_term_page() {
+if( !function_exists( 'ts_bat_load_text_domain' ) ):
+    function ts_bat_load_text_domain() {
         load_plugin_textdomain( 'ts-bulk-add-terms', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
     }
 endif;
