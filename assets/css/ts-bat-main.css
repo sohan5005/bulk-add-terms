@@ -1,0 +1,43 @@
+.ts-bat-wrapper {
+    padding: 0 15px;
+}
+.ts-bat-select-tax-to-add-terms {
+    width: 25%;
+    display: block;
+    float: left;
+    padding-right: 15px;
+    box-sizing: border-box;
+}
+.ts-bat-select-tax-to-add-terms input {
+    margin-bottom: 12px;
+}
+.ts-bat-select-tax-to-add-terms label {
+    margin-bottom: 12px;
+    display: inline-block;
+}
+.ts-bat-enter-your-terms {
+    width: 75%;
+    display: block;
+    float: left;
+}
+.ts-bat-enter-your-terms textarea {
+    width: 100%;
+    max-width: 100%;
+}
+#ts_bat_notice_holder {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: rgba(0,0,0,0.85);
+    display: table;
+    visibility: hidden;
+    height: 70px;
+    width: 250px;
+    border-radius: 10px;
+}
+#ts_bat_notice_holder span {
+    display: table-cell;
+    padding: 0 15px;
+    vertical-align: middle;
+    color: #fff;
+}

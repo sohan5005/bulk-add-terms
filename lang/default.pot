@@ -1,0 +1,51 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-05-26 22:43+0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: bulk-add-terms.php:30 bulk-add-terms.php:31
+msgid "Add bulk terms"
+msgstr ""
+
+#: bulk-add-terms.php:51
+msgid "Congrats! The terms are added successfully!"
+msgstr ""
+
+#: bulk-add-terms.php:52
+msgid ""
+"Something went wrong... are you sure you have enough permission to add terms?"
+msgstr ""
+
+#: bulk-add-terms.php:53
+msgid "Please select a taxonomy first!"
+msgstr ""
+
+#: bulk-add-terms.php:54
+msgid "Please input some terms!"
+msgstr ""
+
+#: bulk-add-terms.php:55
+msgid "Are you sure you want to add these terms?"
+msgstr ""
+
+#: bulk-add-terms.php:69
+msgid "Select taxonomy:"
+msgstr ""
+
+#: bulk-add-terms.php:83
+msgid "Enter your terms:"
+msgstr ""
