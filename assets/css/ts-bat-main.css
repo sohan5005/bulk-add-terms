@@ -41,3 +41,21 @@
     vertical-align: middle;
     color: #fff;
 }
+
+@media only screen and ( max-width: 1200px ) and ( min-width: 783px ) {
+    .ts-bat-select-tax-to-add-terms,
+    .ts-bat-enter-your-terms {
+        width: 50%;
+    }
+}
+
+@media only screen and ( max-width: 782px ) {
+    .ts-bat-select-tax-to-add-terms,
+    .ts-bat-enter-your-terms {
+        width: 100%;
+    }
+    .ts-bat-select-tax-to-add-terms input,
+    .ts-bat-select-tax-to-add-terms label {
+        margin-bottom: 23px;
+    }
+}
