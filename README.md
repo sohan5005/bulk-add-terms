@@ -3,11 +3,12 @@ Wordpress plugin to add multiple taxonomy terms in one go.
 Have you ever been frustrated adding more and more categories or tags or any other terms in a rush? Don't worry anymore. You can add thousands of terms in one go with this plugin.
 
 ## How do I do that?
-1. Install the plugin and activate. A new menu called 'Add Bulk Terms' will pop up.
-2. Click on the menu and you'll be taken to a new page where you will see all the registered taxonomy either by theme or any plugin.
-3. First select a taxonomy which you want to add terms.
-4. Then insert the terms in the right side textarea. Make sure each line contains only one term.
-5. Click on 'Add Now' button. A little confirmation will pop up just to make sure you have inserted everything correctly. Click yes and BOOM. All terms are added.
+1. Download the plugin from plugin repository: https://wordpress.org/plugins/bulk-add-terms/
+2. Install the plugin and activate. A new menu called 'Add Bulk Terms' will pop up.
+3. Click on the menu and you'll be taken to a new page where you will see all the registered taxonomy either by theme or any plugin.
+4. First select a taxonomy which you want to add terms.
+5. Then insert the terms in the right side textarea. Make sure each line contains only one term.
+6. Click on 'Add Now' button. A little confirmation will pop up just to make sure you have inserted everything correctly. Click yes and BOOM. All terms are added.
 
 ## What about nesting parent and child?
 This plugin supports to do that. You can go and do nesting. You can indent child levels with a dash (-). For example:
