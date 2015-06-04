@@ -56,3 +56,13 @@ Unfortunately the maximum supported level is as deep as the SEA.
 ## Known issues
 * Slugs are automatically generated.
 * You can't add child items to those terms which are already added. If you try to do, the given parent item will add as a new term.
+
+## Release notes
+####1.0 Initial Release
+####1.1 Features update
+- New options page added
+- Now same terms can be added to multiple taxonomies
+- Non-hierarchical taxonomies can be hidden from options
+- Added option to keep the text after adding terms
+- Some small bug fixes
+
