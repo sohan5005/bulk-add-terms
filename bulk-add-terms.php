@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Bulk add terms
  * Description: This plugin will help you to add multiple taxonomy terms in one go. Ajax is used to add terms.
- * Version:     1.0
+ * Version:     1.1
  * Author:      Sohan Zaman
  * Author URI:  https://github.com/sohan5005
  * License:     GPL2
@@ -12,6 +12,8 @@
  */
 
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
+
+require_once( dirname(__FILE__) . '/includes/options.php' );
 
 add_action( 'admin_menu', 'ts_register_add_bulk_term_page' );
 add_action( 'admin_enqueue_scripts', 'ts_bat_admin_scripts' );
@@ -62,8 +64,21 @@ endif;
 
 if( !function_exists( 'ts_visualize_add_bulk_term_page' ) ):
     function ts_visualize_add_bulk_term_page() {
-        $all_tax = get_taxonomies( array( 'public' => true, 'show_ui' => true ), 'objects' );
+        
+        $hide_tags = ( get_option('ts_bat_hide_nonhirearchicals') == 1 ? true : false );
+        $multiple = ( get_option( 'ts_bat_select_multiple' ) == 1 ? true : false );
+        $hide_real = ( get_option( 'ts_bat_hide_real_name' ) == 1 ? true : false );
+        $keep_txt = ( get_option( 'ts_bat_dont_empty' ) == 1 ? ' class="keep-txt"' : '' );
+        
+        $query_args = array(
+            'public' => true,
+            'show_ui' => true
+        );
+        
+        $all_tax = get_taxonomies( $query_args, 'objects' );
+        
         wp_nonce_field( 'ts_bat_add_terms_ajax', 'ts_bat_add_terms_ajax_security' );
+        
         ?>
         <div class="ts-bat-wrapper">
             <div class="ts-bat-select-tax-to-add-terms">
@@ -71,18 +86,30 @@ if( !function_exists( 'ts_visualize_add_bulk_term_page' ) ):
                 <?php
                 $i = 0;
                 foreach( $all_tax as $tax => $args ) {
-                    $output = sprintf( '<input type="radio" name="ts_bat_taxonomy_select" id="%1$s" value="%1$s"><label for="%1$s">%2$s (%1$s)</label>', $tax, $args->label );
-                    echo $output;
+                    
+                    $real = ( $hide_real ? '' : ' (' . $tax  . ')');
+                    $type = ( $multiple ? 'checkbox' : 'radio' );
+                    $output = sprintf( '<input type="%4$s" name="ts_bat_taxonomy_select" id="%1$s" value="%1$s"><label for="%1$s">%2$s%3$s</label>', $tax, $args->label, $real, $type );
                     if( $i !== count( $all_tax ) - 1 ) {
-                        echo '<br>';
+                        $output .= '<br>';
                     }
+                    
+                    if( $hide_tags ) {
+                        if( $args->hierarchical == 1 ) {
+                            echo $output;
+                        }
+                    } else {
+                        echo $output;
+                    }
+                    
                     $i++;
+                    
                 }
                 ?>
             </div>
             <div class="ts-bat-enter-your-terms">
                 <label for="bulk_term_input"><h2><?php _e( 'Enter your terms:', 'ts_bat_domain'); ?></h2></label>
-                <textarea name="bulk_term_input" id="bulk_term_input" rows="15"></textarea>
+                <textarea<?php echo $keep_txt; ?> name="bulk_term_input" id="bulk_term_input" rows="15"></textarea>
                 <button type="button" id="submit_bulk_terms" class="button button-primary button-large">Add now</button>
                 <button type="button" id="reset_bulk_terms" class="button button-large">Reset</button>
             </div>
@@ -104,53 +131,67 @@ if( !function_exists( 'ts_bat_add_new_terms_callback' ) ) :
             $taxonomy = $_REQUEST['taxonomy'];
             $terms = $_REQUEST['terms'];
             
-            $lines = split( "\n", $terms );
-            
-            $current_lvl = 0;
-            
-            $lvl_ids = array();
-            
-            foreach( $lines as $line ) {
-                
-                $the_line = trim( preg_replace( "![\r\n]+!", '', $line ) );
-                
-                $args = array();
-        
-                $splits = preg_split( "/^\-+/", $line );
-                
-                if( isset( $splits[1] ) ) {
-                    
-                    $sp_line = $splits[1];
-                    
-                    preg_match( "/^\-+/", $line, $indentors );
-                    
-                    $level = strlen( $indentors[0] );
-                    
-                    if( $level - 1 ===  $current_lvl ) {
-                        
-                        $args = array( 'parent' => $lvl_ids[$level - 1]['term_id'] );
-                        
-                        $current_lvl++;
-                        
-                    } else {
-                        
-                        $args = array( 'parent' => $lvl_ids[$level - 1]['term_id'] );
-                    }
-                    
-                    $lvl_ids[$current_lvl] = wp_insert_term( $sp_line, $taxonomy, $args );
-                    
-                } else {
-                    
-                    $lvl_ids[0] = wp_insert_term( $line, $taxonomy, $args );
-                    
-                    $current_lvl = 0;
-                    
-                }                
-                
+            if( is_array( $taxonomy ) ) {
+                foreach( $taxonomy as $tax ) {
+                    ts_bat_add_this_terms_to_that_tax( $terms, $tax );
+                }
+            } else {
+                ts_bat_add_this_terms_to_that_tax( $terms, $taxonomy );
             }
             
         }
         
         die();
+    }
+endif;
+
+if( !function_exists( 'ts_bat_add_this_terms_to_that_tax' ) ) :
+    function ts_bat_add_this_terms_to_that_tax( $terms, $taxonomy ) {
+            
+        $lines = split( "\n", $terms );
+
+        $current_lvl = 0;
+
+        $lvl_ids = array();
+
+        foreach( $lines as $line ) {
+
+            $the_line = trim( preg_replace( "![\r\n]+!", '', $line ) );
+
+            $args = array();
+
+            $splits = preg_split( "/^\-+/", $line );
+
+            if( isset( $splits[1] ) ) {
+
+                $sp_line = $splits[1];
+
+                preg_match( "/^\-+/", $line, $indentors );
+
+                $level = strlen( $indentors[0] );
+
+                if( $level - 1 ===  $current_lvl ) {
+
+                    $args = array( 'parent' => $lvl_ids[$level - 1]['term_id'] );
+
+                    $current_lvl++;
+
+                } else {
+
+                    $args = array( 'parent' => $lvl_ids[$level - 1]['term_id'] );
+                }
+
+                $lvl_ids[$current_lvl] = wp_insert_term( $sp_line, $taxonomy, $args );
+
+            } else {
+
+                $lvl_ids[0] = wp_insert_term( $line, $taxonomy, $args );
+
+                $current_lvl = 0;
+
+            }                
+
+        }
+        
     }
 endif;

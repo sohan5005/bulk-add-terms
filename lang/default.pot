@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-26 22:43+0600\n"
+"POT-Creation-Date: 2015-06-04 23:30+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,35 +17,95 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: bulk-add-terms.php:30 bulk-add-terms.php:31
+#: bulk-add-terms.php:33 bulk-add-terms.php:34
 msgid "Add bulk terms"
 msgstr ""
 
-#: bulk-add-terms.php:51
+#: bulk-add-terms.php:54
 msgid "Congrats! The terms are added successfully!"
 msgstr ""
 
-#: bulk-add-terms.php:52
+#: bulk-add-terms.php:55
 msgid ""
 "Something went wrong... are you sure you have enough permission to add terms?"
 msgstr ""
 
-#: bulk-add-terms.php:53
+#: bulk-add-terms.php:56
 msgid "Please select a taxonomy first!"
 msgstr ""
 
-#: bulk-add-terms.php:54
+#: bulk-add-terms.php:57
 msgid "Please input some terms!"
 msgstr ""
 
-#: bulk-add-terms.php:55
+#: bulk-add-terms.php:58
 msgid "Are you sure you want to add these terms?"
 msgstr ""
 
-#: bulk-add-terms.php:69
+#: bulk-add-terms.php:85
 msgid "Select taxonomy:"
 msgstr ""
 
-#: bulk-add-terms.php:83
+#: bulk-add-terms.php:111
 msgid "Enter your terms:"
+msgstr ""
+
+#: includes/options.php:15 includes/options.php:26
+msgid "Bulk Add Terms Settings"
+msgstr ""
+
+#: includes/options.php:16
+msgid "Bulk Add Terms"
+msgstr ""
+
+#: includes/options.php:32
+msgid "Save Changes"
+msgstr ""
+
+#: includes/options.php:43
+msgid ""
+"Use these options to control the visual and interaction of the Bulk Add Term "
+"screen"
+msgstr ""
+
+#: includes/options.php:51
+msgid "Hide Non-hierarchical taxonomies"
+msgstr ""
+
+#: includes/options.php:52
+msgid ""
+"This option will hide all taxonomies that can not have children. A great "
+"example is \"post_tags\"."
+msgstr ""
+
+#: includes/options.php:56
+msgid "Multiple taxonomies at a time"
+msgstr ""
+
+#: includes/options.php:57
+msgid ""
+"Enabling this option will give you a chance to select multiple taxonomies to "
+"add same terms at same time."
+msgstr ""
+
+#: includes/options.php:61
+msgid "Hide the real name of taxonomy"
+msgstr ""
+
+#: includes/options.php:62
+msgid ""
+"Enable this option to hide the register name of taxonomies on the add "
+"screen. For example, without this option you will see \"Tags (post_tag)\" "
+"wich is default. On the other hand after turning this option on, you will "
+"see only actual label \"Tags\""
+msgstr ""
+
+#: includes/options.php:66
+msgid "Do not empty the form please!"
+msgstr ""
+
+#: includes/options.php:67
+msgid ""
+"Enable this option to keep all the texts (terms) in the field after a "
+"successful addition of terms"
 msgstr ""
