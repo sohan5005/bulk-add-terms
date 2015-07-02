@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Bulk add terms
  * Description: This plugin will help you to add multiple taxonomy terms in one go. Ajax is used to add terms.
- * Version:     1.1
+ * Version:     1.2
  * Author:      Sohan Zaman
  * Author URI:  https://github.com/sohan5005
  * License:     GPL2
@@ -179,6 +179,9 @@ if( !function_exists( 'ts_bat_add_this_terms_to_that_tax' ) ) :
                 } else {
 
                     $args = array( 'parent' => $lvl_ids[$level - 1]['term_id'] );
+                    
+                    $current_lvl = $level;
+                    
                 }
 
                 $lvl_ids[$current_lvl] = wp_insert_term( $sp_line, $taxonomy, $args );
