@@ -38,6 +38,7 @@
             
             $.ajax({
                 url: ajaxurl,
+				method: 'POST',
                 data: {
                     'action': 'ts_bat_add_new_terms',
                     'security': securityCheck,
@@ -51,6 +52,102 @@
                     }
                     
                     noticeBoard.children('span').html( locale_strings.success );
+                    
+                    noticeBoard.fadeIn();
+                    
+                    setTimeout(function() {
+                        noticeBoard.fadeOut();
+                    }, 3500);
+                    
+                },
+                error: function() {
+                    
+                    noticeBoard.children('span').html( locale_strings.failed );
+                    
+                    noticeBoard.fadeIn();
+                    
+                    setTimeout(function() {
+                        noticeBoard.fadeOut();
+                    }, 3500);
+                    
+                }
+            });
+            
+        });
+        
+        $('#get_bulk_terms').click(function() {
+            
+            if( $('input[name="ts_bat_taxonomy_select"]:checked').length < 1 ) {
+                alert( locale_strings.notax );
+                return;
+            }
+            
+            var securityCheck = $('#ts_bat_add_terms_ajax_security').val(),
+                selTax = $('input[name="ts_bat_taxonomy_select"]:checked').val();
+            
+            if( $('input[name="ts_bat_taxonomy_select"]:checked').length > 1 ) {
+                alert( locale_strings.selonetax );
+				return;
+            }
+            
+            $.ajax({
+                url: ajaxurl,
+				method: 'POST',
+                data: {
+                    'action': 'ts_bat_show_the_terms',
+                    'security': securityCheck,
+                    'taxonomy': selTax
+                },
+                success: function(data) {
+					
+					$('#bulk_term_input').val(data.data);
+                    
+                },
+                error: function() {
+                    
+                    noticeBoard.children('span').html( locale_strings.failed );
+                    
+                    noticeBoard.fadeIn();
+                    
+                    setTimeout(function() {
+                        noticeBoard.fadeOut();
+                    }, 3500);
+                    
+                }
+            });
+            
+        });
+        
+        $('#remove_bulk_terms').click(function() {
+            
+            if( $('input[name="ts_bat_taxonomy_select"]:checked').length < 1 ) {
+                alert( locale_strings.notax );
+                return;
+            }
+            
+            var securityCheck = $('#ts_bat_add_terms_ajax_security').val(),
+                selTax = $('input[name="ts_bat_taxonomy_select"]:checked').val();
+            
+            if( $('input[name="ts_bat_taxonomy_select"]:checked').length > 1 ) {
+                alert( locale_strings.selonetax );
+				return;
+            }
+            
+            if( !confirm( locale_strings.confirmrem ) ) {
+                return;
+            }
+            
+            $.ajax({
+                url: ajaxurl,
+				method: 'POST',
+                data: {
+                    'action': 'ts_bat_remove_the_terms',
+                    'security': securityCheck,
+                    'taxonomy': selTax
+                },
+                success: function(data) {
+                    
+                    noticeBoard.children('span').html( locale_strings.successdel );
                     
                     noticeBoard.fadeIn();
                     
